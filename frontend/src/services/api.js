@@ -1,10 +1,10 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/';
 
 export const api = {
   tasks: {
     getAll: async (status = null) => {
       try {
-        let url = `${API_BASE_URL}/tasks/`;
+        let url = `${API_BASE_URL}tasks/`;
         if (status) {
           url += `?status=${status}`;
         }
@@ -20,7 +20,7 @@ export const api = {
 
     create: async (data) => {
       try {
-        const response = await fetch(`${API_BASE_URL}/tasks/`, {
+        const response = await fetch(`${API_BASE_URL}tasks/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const api = {
 
     markAsDone: async (id) => {
       try {
-        const response = await fetch(`${API_BASE_URL}/tasks/${id}/done/`, {
+        const response = await fetch(`${API_BASE_URL}tasks/${id}/done/`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export const api = {
 
     delete: async (id) => {
       try {
-        const response = await fetch(`${API_BASE_URL}/tasks/${id}/`, {
+        const response = await fetch(`${API_BASE_URL}tasks/${id}/`, {
           method: 'DELETE',
         });
         if (!response.ok) {
