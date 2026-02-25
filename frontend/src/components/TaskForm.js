@@ -66,6 +66,7 @@ function TaskForm({ onTaskCreated }) {
           value={formData.description}
           onChange={handleChange}
           placeholder="Digite a descrição (opcional)"
+          style={{ resize: 'none' }}
           rows="3"
           disabled={loading}
         />
