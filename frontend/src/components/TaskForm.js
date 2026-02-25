@@ -28,6 +28,21 @@ function TaskForm({ onTaskCreated }) {
       return;
     }
 
+    if (!formData.description.trim()) {
+      setError('Por favor, preencha a descrição da tarefa.');
+      return;
+    }
+
+    if (!formData.category) {
+      setError('Por favor, selecione uma categoria.');
+      return;
+    }
+
+    if (!formData.deadline) {
+      setError('Por favor, preencha o prazo da tarefa.');
+      return;
+    }
+
     setLoading(true);
     try {
       const newTask = await api.tasks.create(formData);
@@ -43,6 +58,7 @@ function TaskForm({ onTaskCreated }) {
   return (
     <form onSubmit={handleSubmit} className="task-form">
       <h2>Nova Tarefa</h2>
+      <p className="form-note">Preencha todos os campos</p>
       {error && <div className="error-message">{error}</div>}
       
       <div className="form-group">
@@ -59,13 +75,13 @@ function TaskForm({ onTaskCreated }) {
       </div>
 
       <div className="form-group">
-        <label htmlFor="description">Descrição</label>
+        <label htmlFor="description">Descrição *</label>
         <textarea
           id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
-          placeholder="Digite a descrição (opcional)"
+          placeholder="Digite a descrição"
           style={{ resize: 'none' }}
           rows="3"
           disabled={loading}
@@ -73,7 +89,7 @@ function TaskForm({ onTaskCreated }) {
       </div>
 
       <div className="form-group">
-        <label htmlFor="category">Categoria</label>
+        <label htmlFor="category">Categoria *</label>
         <select
           id="category"
           name="category"
@@ -89,7 +105,7 @@ function TaskForm({ onTaskCreated }) {
       </div>
 
       <div className="form-group">
-        <label htmlFor="deadline">Prazo</label>
+        <label htmlFor="deadline">Prazo *</label>
         <input
           type="datetime-local"
           id="deadline"
